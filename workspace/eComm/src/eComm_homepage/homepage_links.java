@@ -52,7 +52,7 @@ public class homepage_links {
 					driver = new ChromeDriver();
 					break;
 		
-		default:    System.out.println("No Browser Passed. Default is FireFox");
+		default:    System.out.println("No Browser Passed. Default is FireFoxxxxx");
 					driver = new FirefoxDriver();
 					break;
 			
