@@ -5,21 +5,23 @@ import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FileUtils;
-
-// This script will launch the homepage and check all of the links
-
+import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.support.ui.*;
+import org.openqa.selenium.safari.SafariDriver;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.Wait;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+// This script will launch the homepage and check all of the links
+
 import java.lang.Object;
-import org.testng.*;
-import org.junit.Assert;
 import java.util.Date;
 
 
@@ -32,7 +34,7 @@ public class homepage_links {
 		String baseURL ="https://" + args[1]+".pepboys.com/";
 		System.out.println("Selected testing enviornment is " + baseURL);
 		WebDriver driver = null;
-		Date date=new Date();
+		Date date=new Date();  
 		FileWriter outfile = new FileWriter("C:\\Users\\housem\\Desktop\\selenium-2.48.2\\selenium_logging_" + date.getTime() + ".txt", false);
 		PrintWriter output = new PrintWriter(outfile); 
 		
@@ -43,14 +45,17 @@ public class homepage_links {
 					break;
 		
 		case "ie":  System.out.println("Selected browser is Internet Explorer");
-					System.setProperty("webdriver.ie.driver", "C:\\Users\\housem\\Desktop\\selenium-2.48.2\\IEDriverServer.exe");
+					System.setProperty("webdriver.ie.driver", "C:\\Users\\c002157\\Downloads\\IEDriverServer_Win32_2.48.0 (6)exe");
 					driver = new InternetExplorerDriver();
 					break;
 		
 		case "ch":  System.out.println("Selected browser is Chrome");
-					System.setProperty("webdriver.chrome.driver", "C:\\Users\\housem\\Desktop\\selenium-2.48.2\\chromedriver.exe");
+					System.setProperty("webdriver.chrome.driver", "C:\\Users\\c002157\\Downloads\\chromedriver_win32.exe");
 					driver = new ChromeDriver();
 					break;
+	    case "sf":  System.out.println("Selected browser is Safari");
+					System.setProperty("webdriver.safari.driver", "C:\\Users\\c002157\\Downloads\\selenium-safari-driver-2.48.1.exe");
+					driver = new SafariDriver();
 		
 		default:    System.out.println("No Browser Passed. Default is FireFox");
 					driver = new FirefoxDriver();
@@ -64,7 +69,7 @@ public class homepage_links {
 		loggingInfo(" Launcing the selected browser", output);
 		loggingInfo(" ---Checking the build version", output);
 		
-		driver.get(baseURL + "version");
+		driver.get(baseURL + "version"); 
 		driver.manage().window().maximize();
 		String buildVersion= driver.findElement(By.xpath("html/body")).getText();
 		loggingInfo("---Build version is "+ buildVersion, output);
@@ -706,7 +711,7 @@ public class homepage_links {
 		
 		if (found_404){
 			System.out.println("*** Warning - 404 Detected  ***");
-			//loggingInfo(" Launhcing the selected browser", output);  **** figure this out
+			//loggingInfo(" Launching the selected browser", output);  **** figure this out
 			File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
 			FileUtils.copyFile(srcFile, new File("C:\\Users\\housem\\Desktop\\selenium-2.48.2\\screenshot.png"));
 		}
