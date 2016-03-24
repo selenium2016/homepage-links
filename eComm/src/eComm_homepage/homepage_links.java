@@ -50,7 +50,7 @@ public class homepage_links {
 					
 		case "sf":  System.out.println("Selected browser is Safari");
 					System.setProperty("webdriver.safari.driver", "selenium-safari-driver-2.48.1.exe");
-					driver = new SafariDriver();
+					driver = new SafariDriverrrrrrrrr();
 		
 		default:    System.out.println("No Browser Passed. Default is FireFox");
 					driver = new FirefoxDriver();
